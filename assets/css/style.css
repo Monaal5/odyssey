@@ -864,6 +864,75 @@ h1 em {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* --- Staggered Entry Animations --- */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.anim-entry {
+  opacity: 0;
+  animation: slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.anim-delay-1 { animation-delay: 0.15s; }
+.anim-delay-2 { animation-delay: 0.3s; }
+.anim-delay-3 { animation-delay: 0.5s; }
+.anim-delay-4 { animation-delay: 0.7s; }
+
+/* Typing cursor blink */
+.typing-cursor {
+  display: inline-block;
+  font-weight: 300;
+  color: var(--accent-color);
+  animation: cursorBlink 0.7s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Scroll-reveal: hidden until IntersectionObserver triggers */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stat counter pop animation */
+.stat-card.revealed {
+  animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.stat-card:nth-child(1).revealed { animation-delay: 0s; }
+.stat-card:nth-child(2).revealed { animation-delay: 0.12s; }
+.stat-card:nth-child(3).revealed { animation-delay: 0.24s; }
+
+/* Feature rows stagger */
+.feat-row {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.feat-row.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* --- Generated Journey Section --- */
 .journey-header {
   display: flex;

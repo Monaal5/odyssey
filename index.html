@@ -68,11 +68,11 @@
     <section class="app-view active" id="home-view">
       <div class="landing-hero">
         <div>
-          <div class="pill-badge">100+ Skills Mapped</div>
-          <h1 class="landing-title">Develop <em>skills</em><br>from the best source</h1>
-          <p class="landing-sub">Everyone agrees with the fact that learning management systems are a tremendous way to expand learners' knowledge base and help staff enhance their skills.</p>
+          <div class="pill-badge anim-entry">100+ Skills Mapped</div>
+          <h1 class="landing-title anim-entry anim-delay-1">Develop <em>skills</em><br>from the best source</h1>
+          <p class="landing-sub anim-entry anim-delay-2"><span id="typing-target"></span><span class="typing-cursor">|</span></p>
           
-          <div class="landing-ctas">
+          <div class="landing-ctas anim-entry anim-delay-3">
             <button class="btn primary" onclick="switchView('journey-view'); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelector('[data-view=journey-view]').classList.add('active');" style="padding: 14px 28px; font-size: 14px;">Build a Roadmap</button>
             <button class="btn" onclick="switchView('profile-view'); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelector('[data-view=profile-view]').classList.add('active');" style="padding: 14px 28px; font-size: 14px;">Register Mentor</button>
 
@@ -143,7 +143,7 @@
       </div>
 
       <!-- Live Stats Display -->
-      <div class="stats-grid">
+      <div class="stats-grid scroll-reveal">
         <div class="stat-card">
           <div class="stat-val" id="stat-skills-count">3+</div>
           <div class="stat-lbl">Active Skill Engines</div>
@@ -159,7 +159,7 @@
       </div>
 
       <!-- Specially Designed Area -->
-      <div class="landing-features">
+      <div class="landing-features scroll-reveal">
         <div class="features-intro">
           <div class="pill-badge" style="background:#ECFDF5; border-color:#1C1917; color:#15803D;">Specially Designed</div>
           <h2 class="sec-title" style="font-size:36px; margin-top:10px;">Why Odyssey Goal Engine works</h2>

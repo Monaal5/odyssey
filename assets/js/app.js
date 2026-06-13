@@ -182,6 +182,11 @@ document.addEventListener("DOMContentLoaded", () => {
       b.classList.remove("active");
     }
   });
+
+  // --- Landing Page Animations ---
+  initTypingEffect();
+  initScrollReveal();
+  initCounterAnimation();
 });
 
 // View Switcher
@@ -1430,4 +1435,139 @@ function openManualPdf() {
   `;
   
   backdrop.classList.add("show");
+}
+
+// ================================================
+// LANDING PAGE ANIMATIONS
+// ================================================
+
+// 1. Typing Effect — cycles through phrases
+function initTypingEffect() {
+  const target = document.getElementById("typing-target");
+  if (!target) return;
+
+  const phrases = [
+    "Everyone agrees that learning management systems are a tremendous way to expand learners' knowledge base.",
+    "One engine. Every goal. Build your roadmap today.",
+    "Bridge digital learning with local mentors and academies.",
+    "From coding to guitar to driving — master any skill."
+  ];
+
+  let phraseIdx = 0;
+  let charIdx = 0;
+  let isDeleting = false;
+  let pauseTimer = null;
+
+  function tick() {
+    const current = phrases[phraseIdx];
+
+    if (!isDeleting) {
+      // Typing forward
+      target.textContent = current.substring(0, charIdx + 1);
+      charIdx++;
+
+      if (charIdx === current.length) {
+        // Pause at end of phrase before deleting
+        pauseTimer = setTimeout(() => {
+          isDeleting = true;
+          tick();
+        }, 2200);
+        return;
+      }
+      setTimeout(tick, 35 + Math.random() * 25);
+    } else {
+      // Deleting
+      target.textContent = current.substring(0, charIdx - 1);
+      charIdx--;
+
+      if (charIdx === 0) {
+        isDeleting = false;
+        phraseIdx = (phraseIdx + 1) % phrases.length;
+        setTimeout(tick, 400);
+        return;
+      }
+      setTimeout(tick, 18);
+    }
+  }
+
+  // Start typing after hero entry animations complete
+  setTimeout(tick, 800);
+}
+
+// 2. Scroll Reveal — IntersectionObserver for sections
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll(".scroll-reveal, .feat-row");
+  if (!revealElements.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("revealed");
+
+        // If it's the stats grid, also animate child stat-cards
+        if (entry.target.classList.contains("stats-grid")) {
+          entry.target.querySelectorAll(".stat-card").forEach(card => {
+            card.classList.add("revealed");
+          });
+        }
+
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: "0px 0px -40px 0px"
+  });
+
+  revealElements.forEach(el => observer.observe(el));
+}
+
+// 3. Animated Stat Counter — counts up from 0
+function initCounterAnimation() {
+  const statVals = document.querySelectorAll(".stat-val");
+  if (!statVals.length) return;
+
+  let animated = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !animated) {
+        animated = true;
+        animateCounters();
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const statsGrid = document.querySelector(".stats-grid");
+  if (statsGrid) observer.observe(statsGrid);
+
+  function animateCounters() {
+    statVals.forEach(el => {
+      const text = el.textContent.trim();
+      const numMatch = text.match(/(\d+)/);
+      if (!numMatch) return;
+      
+      const finalNum = parseInt(numMatch[1]);
+      const suffix = text.replace(numMatch[1], "");
+      let current = 0;
+      const duration = 1200;
+      const startTime = performance.now();
+
+      function step(timestamp) {
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        current = Math.round(eased * finalNum);
+        el.textContent = current + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        }
+      }
+
+      requestAnimationFrame(step);
+    });
+  }
 }
