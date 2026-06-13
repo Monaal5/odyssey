@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odyssey — The Universal Goal & Skill Execution Platform</title>
+  <meta name="description" content="One engine, every goal. Explore personalized learning blueprints, search nearby offline/online institutions, and connect with certified local skill mentors.">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- SIDEBAR DRAWER -->
+  <div class="sidebar-drawer" id="sidebar-drawer">
+    <div class="drawer-header">
+      <div class="drawer-title">MENU</div>
+      <button class="drawer-close-btn" onclick="toggleSidebar(false)" aria-label="Close menu">×</button>
+    </div>
+    <nav class="drawer-nav">
+      <button class="drawer-item" data-view="directory-view" onclick="handleDrawerClick(this)">Offline Resources</button>
+      <button class="drawer-item" data-view="journey-view" onclick="handleDrawerClick(this)">Courses</button>
+      <button class="drawer-item" data-view="progress-view" onclick="handleDrawerClick(this)">My Progress</button>
+      <button class="drawer-item" data-view="peers-view" onclick="handleDrawerClick(this)">Connect Peers</button>
+      <button class="drawer-item" data-view="arch-view" onclick="handleDrawerClick(this)">Platform Architecture</button>
+      <button class="drawer-item" data-view="about-view" onclick="handleDrawerClick(this)">About Platform</button>
+
+    </nav>
+  </div>
+  <div class="drawer-overlay" id="drawer-overlay" onclick="toggleSidebar(false)"></div>
+
+  <!-- HEADER / NAVIGATION -->
+  <header>
+    <div class="container nav-container">
+      <!-- Left side: Hamburger Toggle -->
+      <div class="nav-left">
+        <button class="menu-toggle-btn" onclick="toggleSidebar(true)" aria-label="Open menu">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+        <button class="home-btn" onclick="switchView('home-view'); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('.drawer-item').forEach(b => b.classList.remove('active'));" aria-label="Go home">🏠 Home</button>
+      </div>
+      
+      <!-- Center: Logo -->
+      <div class="logo-container">
+        <div class="logo" onclick="switchView('home-view'); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('.drawer-item').forEach(b => b.classList.remove('active'));">
+          ODYSSEY
+        </div>
+      </div>
+      
+      <!-- Right side: Online Resources & Login -->
+      <div class="nav-right">
+        <button class="tab-btn" data-view="resources-view">Online Resources</button>
+        <button class="tab-btn" data-view="profile-view">Login</button>
+        <button class="btn join-now-btn" onclick="switchView('profile-view'); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('.drawer-item').forEach(b => b.classList.remove('active')); document.querySelector('[data-view=profile-view]').classList.add('active');">Join now</button>
+        
+        <div class="user-badge" id="header-user-badge" style="cursor:pointer;" onclick="switchView('dashboard-view'); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('.drawer-item').forEach(b => b.classList.remove('active')); document.querySelector('[data-view=dashboard-view]').classList.add('active');">
+          <span id="user-name-tag">Guest</span>
+          <span class="role-tag" id="user-role-tag">learner</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="container">
+
+    <!-- ── VIEW 0: BEAUTIFUL WELCOME LANDING PAGE ── -->
+    <section class="app-view active" id="home-view">
+      <div class="landing-hero">
+        <div>
+          <div class="pill-badge">100+ Skills Mapped</div>
+          <h1 class="landing-title">Develop <em>skills</em><br>from the best source</h1>
+          <p class="landing-sub">Everyone agrees with the fact that learning management systems are a tremendous way to expand learners' knowledge base and help staff enhance their skills.</p>
+          
+          <div class="landing-ctas">
+            <button class="btn primary" onclick="switchView('journey-view'); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelector('[data-view=journey-view]').classList.add('active');" style="padding: 14px 28px; font-size: 14px;">Build a Roadmap</button>
+            <button class="btn" onclick="switchView('profile-view'); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelector('[data-view=profile-view]').classList.add('active');" style="padding: 14px 28px; font-size: 14px;">Register Mentor</button>
+
+            <button class="btn" onclick="toggleSidebar(true)" style="padding: 14px 28px; font-size: 14px; background:var(--surface-color-2);">☰ Explore Menu</button>
+          </div>
+        </div>
+        
+        <div class="hero-art-container">
+          <svg viewBox="0 0 400 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Light Beam Casting down -->
+            <polygon points="200,20 100,340 300,340" fill="rgba(253, 224, 71, 0.2)" stroke="#1C1917" stroke-width="2" stroke-dasharray="4 4" />
+            
+            <!-- Bookshelf -->
+            <rect x="280" y="120" width="100" height="220" fill="#FFFFFF" stroke="#1C1917" stroke-width="2.5" rx="6" />
+            <line x1="280" y1="180" x2="380" y2="180" stroke="#1C1917" stroke-width="2.5" />
+            <line x1="280" y1="240" x2="380" y2="240" stroke="#1C1917" stroke-width="2.5" />
+            <line x1="280" y1="290" x2="380" y2="290" stroke="#1C1917" stroke-width="2.5" />
+            
+            <rect x="290" y="140" width="18" height="40" fill="#EA580C" stroke="#1C1917" stroke-width="2" />
+            <rect x="312" y="135" width="14" height="45" fill="#3B82F6" stroke="#1C1917" stroke-width="2" />
+            <rect x="330" y="145" width="22" height="35" fill="#10B981" stroke="#1C1917" stroke-width="2" />
+            <rect x="350" y="148" width="15" height="38" fill="#FBBF24" stroke="#1C1917" stroke-width="2" rx="1" transform="rotate(15 350 148)" />
+
+            <rect x="290" y="200" width="20" height="40" fill="#3B82F6" stroke="#1C1917" stroke-width="2" />
+            <rect x="315" y="205" width="20" height="35" fill="#EA580C" stroke="#1C1917" stroke-width="2" />
+            
+            <rect x="290" y="250" width="22" height="40" fill="#10B981" stroke="#1C1917" stroke-width="2" />
+            <rect x="320" y="250" width="18" height="40" fill="#FBBF24" stroke="#1C1917" stroke-width="2" />
+
+            <circle cx="330" cy="90" r="18" fill="#FFFFFF" stroke="#1C1917" stroke-width="2" />
+            <line x1="330" y1="90" x2="330" y2="80" stroke="#1C1917" stroke-width="2" />
+            <line x1="330" y1="90" x2="340" y2="90" stroke="#1C1917" stroke-width="2" />
+
+            <!-- Desk -->
+            <rect x="20" y="250" width="90" height="10" fill="#FFFFFF" stroke="#1C1917" stroke-width="2" />
+            <line x1="35" y1="260" x2="20" y2="340" stroke="#1C1917" stroke-width="2" />
+            <line x1="95" y1="260" x2="110" y2="340" stroke="#1C1917" stroke-width="2" />
+            <rect x="30" y="235" width="12" height="15" fill="#EA580C" stroke="#1C1917" stroke-width="2" rx="2" />
+            <path d="M42 240 C45 240 45 245 42 245" stroke="#1C1917" stroke-width="2" fill="none" />
+
+            <!-- Chair -->
+            <path d="M120 280 L140 280 L135 340 M125 340 L130 280" stroke="#1C1917" stroke-width="2" fill="none" />
+            <rect x="115" y="270" width="30" height="10" fill="#FBBF24" stroke="#1C1917" stroke-width="2" rx="2" />
+            <line x1="120" y1="270" x2="120" y2="230" stroke="#1C1917" stroke-width="2" />
+            <line x1="140" y1="270" x2="140" y2="230" stroke="#1C1917" stroke-width="2" />
+            <rect x="118" y="230" width="24" height="15" fill="#FBBF24" stroke="#1C1917" stroke-width="2" rx="2" />
+
+            <!-- Lamp -->
+            <line x1="200" y1="0" x2="200" y2="50" stroke="#1C1917" stroke-width="2.5" />
+            <path d="M180 50 C180 35 220 35 220 50 Z" fill="#FBBF24" stroke="#1C1917" stroke-width="2" />
+            <circle cx="200" cy="55" r="5" fill="#FFFFFF" stroke="#1C1917" stroke-width="2" />
+
+            <!-- Student -->
+            <line x1="185" y1="260" x2="185" y2="330" stroke="#1C1917" stroke-width="3" />
+            <line x1="205" y1="260" x2="205" y2="330" stroke="#1C1917" stroke-width="3" />
+            <rect x="175" y="325" width="15" height="10" fill="#EA580C" stroke="#1C1917" stroke-width="2" rx="3" />
+            <rect x="200" y="325" width="15" height="10" fill="#EA580C" stroke="#1C1917" stroke-width="2" rx="3" />
+            <rect x="175" y="170" width="45" height="90" fill="#FBBF24" stroke="#1C1917" stroke-width="2.5" rx="10" />
+            <rect x="160" y="180" width="16" height="60" fill="#EA580C" stroke="#1C1917" stroke-width="2.5" rx="5" />
+            <circle cx="197" cy="145" r="14" fill="#FFFFFF" stroke="#1C1917" stroke-width="2.5" />
+            <path d="M190 135 C195 130 205 130 205 138" stroke="#1C1917" stroke-width="2.5" fill="#1C1917" />
+            <rect x="210" y="195" width="25" height="35" fill="#3B82F6" stroke="#1C1917" stroke-width="2" rx="2" transform="rotate(-15 210 195)" />
+            <line x1="210" y1="205" x2="230" y2="200" stroke="#FFFFFF" stroke-dasharray="2 2" />
+            <line x1="210" y1="215" x2="230" y2="210" stroke="#FFFFFF" stroke-dasharray="2 2" />
+            <path d="M205 195 Q220 200 215 215" stroke="#1C1917" stroke-width="3" fill="none" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Live Stats Display -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-val" id="stat-skills-count">3+</div>
+          <div class="stat-lbl">Active Skill Engines</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" id="stat-mentors-count">7+</div>
+          <div class="stat-lbl">Mentors Connected</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" id="stat-schools-count">6+</div>
+          <div class="stat-lbl">Institutions Enriched</div>
+        </div>
+      </div>
+
+      <!-- Specially Designed Area -->
+      <div class="landing-features">
+        <div class="features-intro">
+          <div class="pill-badge" style="background:#ECFDF5; border-color:#1C1917; color:#15803D;">Specially Designed</div>
+          <h2 class="sec-title" style="font-size:36px; margin-top:10px;">Why Odyssey Goal Engine works</h2>
+          <p class="sec-subtitle" style="font-size:15px; max-width:600px; margin: 8px auto 0;">A highly tailored execution framework that combines digital pathing structures with local human connections.</p>
+        </div>
+
+        <!-- Row 1: Intent Mapping -->
+        <div class="feat-row">
+          <div class="feat-text-block">
+            <div class="capsule-hl green">AI parsing</div>
+            <h3 class="feat-row-title">Parse goal intent with automated constraints</h3>
+            <p class="feat-row-desc">Type any goal or skill in natural language. Our conversational goal classifier parses the subject, detects local constraints, and asks prompt questions to tailor the learning timeline.</p>
+            <button class="btn primary" onclick="switchView('journey-view'); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelector('[data-view=journey-view]').classList.add('active');">Build a Roadmap</button>
+          </div>
+          <div class="feat-row-art">
+            <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="20" y1="260" x2="380" y2="260" stroke="#1C1917" stroke-width="2.5" />
+              <!-- Chat Mockup Window -->
+              <rect x="50" y="40" width="160" height="200" fill="#FFFFFF" stroke="#1C1917" stroke-width="2.5" rx="10" />
+              <rect x="50" y="40" width="160" height="30" fill="#F7F5F0" stroke="#1C1917" stroke-width="2.5" rx="10" />
+              <!-- Chat Title dot -->
+              <circle cx="65" cy="55" r="4" fill="#EA580C" />
+              <line x1="80" y1="55" x2="130" y2="55" stroke="#1C1917" stroke-width="2" />
+              
+              <!-- Chat bubbles inside -->
+              <rect x="60" y="85" width="90" height="25" fill="#F3F4F6" stroke="#1C1917" stroke-width="1.5" rx="6" />
+              <line x1="68" y1="97" x2="130" y2="97" stroke="#1C1917" stroke-width="1.5" />
+              
+              <rect x="110" y="125" width="90" height="25" fill="#D1FAE5" stroke="#1C1917" stroke-width="1.5" rx="6" />
+              <line x1="118" y1="137" x2="182" y2="137" stroke="#1C1917" stroke-width="1.5" />
+
+              <rect x="60" y="165" width="110" height="25" fill="#F3F4F6" stroke="#1C1917" stroke-width="1.5" rx="6" />
+              <line x1="68" y1="177" x2="150" y2="177" stroke="#1C1917" stroke-width="1.5" />
+              
+              <!-- Generator arrow connecting chat to node tree -->
+              <path d="M220 140 Q250 140 270 110" stroke="#EA580C" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="4 4" />
+              <path d="M270 110 L260 112 M270 110 L268 122" stroke="#EA580C" stroke-width="2.5" fill="none" />
+
+              <!-- Output Node Tree -->
+              <rect x="260" y="60" width="100" height="40" fill="#FFFFFF" stroke="#1C1917" stroke-width="2" rx="6" />
+              <text x="270" y="84" font-family="'Syne', sans-serif" font-weight="800" font-size="12" fill="#1C1917">Web Dev</text>
+              <circle cx="345" cy="80" r="6" fill="#10B981" />
+
+              <rect x="270" y="160" width="100" height="40" fill="#FFFFFF" stroke="#1C1917" stroke-width="2" rx="6" transform="rotate(5 270 160)" />
+              <text x="282" y="184" font-family="'Syne', sans-serif" font-weight="800" font-size="12" fill="#1C1917">Guitar</text>
+              <circle cx="355" cy="180" r="6" fill="#3B82F6" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Row 2: Hybrid Matchmaking -->
+        <div class="feat-row reverse">
+          <div class="feat-text-block">
+            <div class="capsule-hl orange">hybrid match</div>
+            <h3 class="feat-row-title">Link digital roadmaps to physical institutions</h3>
+            <p class="feat-row-desc">We bridge digital week-by-week goals with offline resources. Odyssey matches local learning academies and active skill holders right in your neighborhood for offline sessions.</p>
+            <button class="btn primary" onclick="switchView('directory-view'); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelector('[data-view=directory-view]').classList.add('active');">Find Mentors</button>
+          </div>
+          <div class="feat-row-art">
+            <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="20" y1="260" x2="380" y2="260" stroke="#1C1917" stroke-width="2.5" />
+              
+              <!-- Location Map Board -->
+              <rect x="80" y="50" width="240" height="180" fill="#F7F5F0" stroke="#1C1917" stroke-width="2.5" rx="12" />
+              <!-- Map paths/grid lines -->
+              <path d="M120 50 Q160 120 100 230 M280 50 Q220 140 300 230 M80 140 H320" stroke="#1C1917" stroke-width="1.5" stroke-dasharray="2 4" />
+              
+              <!-- Match Pin 1: Physical Academy -->
+              <rect x="130" y="80" width="45" height="35" fill="#FFFFFF" stroke="#1C1917" stroke-width="2" rx="4" />
+              <rect x="138" y="88" width="10" height="10" fill="#EA580C" rx="2" />
+              <line x1="155" y1="88" x2="168" y2="88" stroke="#1C1917" stroke-width="1.5" />
+              <line x1="155" y1="98" x2="168" y2="98" stroke="#1C1917" stroke-width="1.5" />
+              <path d="M152 115 L152 130" stroke="#1C1917" stroke-width="2" />
+              <circle cx="152" cy="132" r="3" fill="#1C1917" />
+
+              <!-- Match Pin 2: Mentor Profile -->
+              <circle cx="250" cy="140" r="18" fill="#FFFFFF" stroke="#1C1917" stroke-width="2" />
+              <circle cx="250" cy="136" r="6" fill="#3B82F6" stroke="#1C1917" stroke-width="1" />
+              <path d="M242 150 C242 145 258 145 258 150 Z" fill="#3B82F6" stroke="#1C1917" stroke-width="1" />
+              <!-- Pin stem -->
+              <path d="M250 158 L250 175" stroke="#1C1917" stroke-width="2" />
+              <circle cx="250" cy="177" r="3" fill="#1C1917" />
+              
+              <!-- Connecting Vector Ring -->
+              <path d="M152 132 C170 170 230 185 250 177" stroke="#EA580C" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="4 2" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Row 3: Agentic progress loops -->
+        <div class="feat-row">
+          <div class="feat-text-block">
+            <div class="capsule-hl orange">agentic loops</div>
+            <h3 class="feat-row-title">Proactive monitoring and helper triggers</h3>
+            <p class="feat-row-desc">Our check-in loop monitors task completions. If learning progress stalls, the system flags the checkpoint state and initiates alerts to connected local mentors automatically.</p>
+            <button class="btn primary" onclick="switchView('profile-view'); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelector('[data-view=profile-view]').classList.add('active');">Register Profile</button>
+          </div>
+          <div class="feat-row-art">
+            <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="20" y1="260" x2="380" y2="260" stroke="#1C1917" stroke-width="2.5" />
+              
+              <!-- Progress circle -->
+              <circle cx="200" cy="140" r="70" stroke="#1C1917" stroke-width="2.5" fill="#FFFFFF" />
+              <path d="M200 70 A70 70 0 1 1 130 140" stroke="#EA580C" stroke-width="6" fill="none" stroke-linecap="round" />
+              <circle cx="200" cy="140" r="50" stroke="#1C1917" stroke-width="1.5" stroke-dasharray="4 4" fill="none" />
+              
+              <!-- Center Text -->
+              <text x="200" y="148" font-family="'Syne', sans-serif" font-weight="800" font-size="24" fill="#1C1917" text-anchor="middle">75%</text>
+              
+              <!-- Checklist Nodes orbiting -->
+              <g transform="translate(40, 40)">
+                <rect x="10" y="20" width="80" height="36" fill="#D1FAE5" stroke="#1C1917" stroke-width="2" rx="6" />
+                <path d="M20 38 L26 44 L38 32" stroke="#10B981" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                <text x="44" y="41" font-family="'Outfit', sans-serif" font-weight="700" font-size="10" fill="#1C1917">Step 1</text>
+              </g>
+
+              <g transform="translate(260, 40)">
+                <rect x="10" y="20" width="80" height="36" fill="#FEE2E2" stroke="#1C1917" stroke-width="2" rx="6" />
+                <circle cx="22" cy="38" r="7" fill="#EF4444" stroke="#1C1917" stroke-width="1.5" />
+                <text x="22" y="42" font-family="'Outfit', sans-serif" font-weight="800" font-size="10" fill="#FFFFFF" text-anchor="middle">!</text>
+                <text x="36" y="41" font-family="'Outfit', sans-serif" font-weight="700" font-size="10" fill="#1C1917">Stuck</text>
+              </g>
+              
+              <!-- Alert sparkle -->
+              <path d="M200 20 L205 30 L215 35 L205 40 L200 50 L195 40 L185 35 L195 30 Z" fill="#FBBF24" stroke="#1C1917" stroke-width="1.5" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonials and Popular Courses Section -->
+      <div class="testimonials-section">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding: 0 40px; margin-bottom: 20px;">
+          <div style="text-align:left;">
+            <div class="pill-badge" style="margin-bottom:8px;">Top Electives</div>
+            <h2 class="sec-title" style="font-size:32px;">Our popular courses voted by students</h2>
+          </div>
+          <button class="btn primary" onclick="switchView('directory-view'); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelector('[data-view=directory-view]').classList.add('active');" style="background:var(--secondary-color);">View all course</button>
+        </div>
+        
+        <div class="popular-courses-container">
+          <!-- Card 1 -->
+          <div class="course-card">
+            <div class="course-card-top">
+              <div class="course-badge-icon">🔬</div>
+              <div class="course-meta-row">
+                <span class="rating-star">★ 4.3 <span style="font-weight:400; color:var(--text-faint);">(300 reviews)</span></span>
+                <span>⏱ 2hrs 40mins</span>
+              </div>
+              <h3 class="course-card-title">Learn practical science in english</h3>
+            </div>
+            <div class="course-card-footer">
+              <button class="course-enroll-btn" onclick="executeSelectedCourse('web development')">Enroll course</button>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="course-card">
+            <div class="course-card-top">
+              <div class="course-badge-icon">🎨</div>
+              <div class="course-meta-row">
+                <span class="rating-star">★ 4.5 <span style="font-weight:400; color:var(--text-faint);">(420 reviews)</span></span>
+                <span>⏱ 3hrs 15mins</span>
+              </div>
+              <h3 class="course-card-title">User experience designing</h3>
+            </div>
+            <div class="course-card-footer">
+              <button class="course-enroll-btn" onclick="executeSelectedCourse('classical guitar')">Enroll course</button>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="course-card">
+            <div class="course-card-top">
+              <div class="course-badge-icon">✍️</div>
+              <div class="course-meta-row">
+                <span class="rating-star">★ 4.4 <span style="font-weight:400; color:var(--text-faint);">(180 reviews)</span></span>
+                <span>⏱ 1hr 50mins</span>
+              </div>
+              <h3 class="course-card-title">UX Writing or web content writing</h3>
+            </div>
+            <div class="course-card-footer">
+              <button class="course-enroll-btn" onclick="executeSelectedCourse('professional driving')">Enroll course</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Join Community Area -->
+      <div class="community-section">
+        <div class="community-box">
+          <h2 class="community-title">Join the biggest community of learning</h2>
+          <p style="font-size:15px; color:var(--text-muted); margin-bottom:30px; line-height:1.6;">Connect with thousands of students, active mentors, and institutions in your area to expedite your skills learning path.</p>
+          <button class="btn primary" onclick="switchView('profile-view'); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelector('[data-view=profile-view]').classList.add('active');" style="padding:14px 32px; font-size:14px; text-transform:uppercase;">Get Started For Free</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VIEW 1: GOAL EXPLORER (ROADMAP GENERATOR) ── -->
+    <section class="app-view" id="journey-view">
+      
+      <!-- HERO & SEARCH SECTION -->
+      <div class="hero-section">
+        <div class="eyebrow">One Engine. Every Goal.</div>
+        <h1>Map Your Path to Any <em>Skill or Goal</em></h1>
+        <p class="subtitle">Enter any skill you want to acquire or task you want to complete. The AI Goal Engine generates your roadmap, matches local academies, and connects you with active mentors.</p>
+        
+        <!-- Interactive Engine Input -->
+        <div class="engine-input-container">
+          <div class="engine-input-wrapper">
+            <span class="input-icon">🔍</span>
+            <input type="text" class="engine-input" id="engine-input" placeholder="Try typing 'classical guitar', 'web development', or 'professional driving'...">
+            <button class="engine-submit" id="engine-submit">Execute</button>
+          </div>
+          <div class="input-glow"></div>
+          
+          <div class="sample-queries">
+            <span class="sample-tag" data-query="Web Development">💻 Web Development</span>
+            <span class="sample-tag" data-query="Classical Guitar">🎸 Classical Guitar</span>
+            <span class="sample-tag" data-query="Professional Driving">🚗 Professional Driving</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agentic loop check-in alert -->
+      <div class="agentic-banner" id="nudge-banner" style="display: none;">
+        <!-- Populated dynamically by app.js -->
+      </div>
+
+      <div class="journey-header">
+        <div class="journey-title-info">
+          <h2 id="journey-skill-name">WEB DEVELOPMENT</h2>
+          <p id="journey-meta">Education & Tech · 12 Weeks</p>
+        </div>
+        <div class="journey-actions">
+
+          <button class="btn primary" onclick="switchView('profile-view'); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelector('[data-view=profile-view]').classList.add('active');">
+            Register to Track Progress
+          </button>
+        </div>
+      </div>
+
+      <div class="journey-grid">
+        <!-- Interactive Step Roadmap -->
+        <div>
+          <div class="sec-title-container">
+            <h3 class="sec-title">Generated Learning Path</h3>
+            <p class="sec-subtitle">Your step-by-step master plan with milestones, checkable tasks, and custom timeframes.</p>
+          </div>
+          <div class="roadmap-timeline" id="roadmap-container">
+            <!-- Populated dynamically by app.js -->
+          </div>
+        </div>
+
+        <!-- Sidebar Contextual Marketplace (Mentors & Institutions) -->
+        <div class="journey-sidebar">
+          
+          <!-- Matched Mentors -->
+          <div class="sidebar-panel">
+            <div class="panel-header">
+              <h4 class="panel-title">Matched Mentors</h4>
+              <div class="filter-pills">
+                <button class="pill-btn active" onclick="filterExperts('all', this)">All</button>
+                <button class="pill-btn" onclick="filterExperts('online', this)">Online</button>
+                <button class="pill-btn" onclick="filterExperts('local', this)">Local</button>
+              </div>
+            </div>
+            <div class="card-list" id="experts-list">
+              <!-- Populated dynamically by app.js -->
+            </div>
+          </div>
+
+          <!-- Matched Institutions -->
+          <div class="sidebar-panel">
+            <div class="panel-header">
+              <h4 class="panel-title">Available Institutions</h4>
+              <div class="filter-pills">
+                <button class="pill-btn active" onclick="filterInstitutions('all', this)">All</button>
+                <button class="pill-btn" onclick="filterInstitutions('online', this)">Online</button>
+                <button class="pill-btn" onclick="filterInstitutions('offline', this)">Offline</button>
+              </div>
+            </div>
+            <div class="card-list" id="institutions-list">
+              <!-- Populated dynamically by app.js -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VIEW 2: PLATFORM ARCHITECTURE ANALYZER ── -->
+    <section class="app-view" id="arch-view">
+      <div class="sec-title-container" style="text-align: center; margin-bottom: 40px;">
+        <h2 class="sec-title" style="font-size:32px;">Platform Architecture Analysis</h2>
+        <p class="sec-subtitle" style="font-size:15px; max-width:600px; margin: 6px auto 0;">Explore how Odyssey's unified engine handles custom skills learning, local connections, and progress tracking under a single domain-agnostic processor.</p>
+      </div>
+
+      <div class="arch-grid">
+        <!-- Interactive Steps Selectors -->
+        <div class="arch-steps-panel">
+          <div class="arch-step-card active" onclick="selectArchStep(0, this)" data-icon="🧠" data-title="Layer 0 & 1: Goal Input & Intent Parsing" data-desc="The system processes user's natural language requests (e.g. 'I want to learn guitar') through an intent classification loop to identify target fields and trigger structural questions.">
+            <div class="arch-step-num">Layer 0 - 1</div>
+            <div class="arch-step-name">Intent Processing</div>
+          </div>
+          <div class="arch-step-card" onclick="selectArchStep(1, this)" data-icon="📋" data-title="Layer 1: AI Journey Generator" data-desc="Using generalized template maps, the engine creates custom duration timelines, milestone blocks, and checkable task lists tailored to the user's constraints.">
+            <div class="arch-step-num">Layer 1</div>
+            <div class="arch-step-name">Personalization Engine</div>
+          </div>
+          <div class="arch-step-card" onclick="selectArchStep(2, this)" data-icon="🏠" data-title="Layer 2: Domain Verticals" data-desc="Standard templates organize milestones into specialized industries: Real Estate (Buy/Sell), Vocational Driving, Classical Guitar, or Technical Education.">
+            <div class="arch-step-num">Layer 2</div>
+            <div class="arch-step-name">Vertical Repertoire</div>
+          </div>
+          <div class="arch-step-card" onclick="selectArchStep(3, this)" data-icon="🔄" data-title="Layer 3: Agentic Execution Loop" data-desc="A check-in framework monitors task completions. If progress slows, it flags the step state as 'blocked' and alerts connected experts.">
+            <div class="arch-step-num">Layer 3</div>
+            <div class="arch-step-name">Progress Monitoring</div>
+          </div>
+          <div class="arch-step-card" onclick="selectArchStep(4, this)" data-icon="🎯" data-title="Layer 4: Connect & Match Marketplace" data-desc="Instantly surfaces online classes, offline academies, and active mentors in the area holding matching skills. Matches occur exactly when needed.">
+            <div class="arch-step-num">Layer 4</div>
+            <div class="arch-step-name">Marketplace Connection</div>
+          </div>
+        </div>
+
+        <!-- Detail Explanation Box -->
+        <div class="arch-detail-panel">
+          <div class="arch-detail-icon" id="arch-detail-icon">🧠</div>
+          <h3 class="arch-detail-title" id="arch-detail-title">Layer 0 & 1: Goal Input & Intent Parsing</h3>
+          <p class="arch-detail-desc" id="arch-detail-desc">The system processes user's natural language requests (e.g. 'I want to learn guitar') through an intent classification loop to identify target fields and trigger structural questions.</p>
+          
+          <div class="arch-detail-features" id="arch-features-grid">
+            <div class="arch-feat-item">
+              <div class="arch-feat-title"><span>✦</span> Goal Intent Parsing</div>
+              <div class="arch-feat-desc">User types natural language; engine parses subject, budget, time, and locations.</div>
+            </div>
+            <div class="arch-feat-item">
+              <div class="arch-feat-title"><span>✦</span> Interactive Prompts</div>
+              <div class="arch-feat-desc">Dynamic AI conversation requests missing attributes (like experience level).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VIEW 3: GLOBAL SKILL DIRECTORY ── -->
+    <section class="app-view" id="directory-view">
+      <div class="sec-title-container">
+        <h2 class="sec-title">Global Skills Directory</h2>
+        <p class="sec-subtitle">Find local/online schools, academies, and active skill holders in your geographical area.</p>
+      </div>
+
+      <div class="dir-layout">
+        <!-- Sidebar filters -->
+        <div class="dir-search-panel">
+          <div class="filter-group">
+            <label class="filter-label">Target Skill Category</label>
+            <select class="filter-select" id="dir-skill-select" onchange="generateJourney(this.value)">
+              <option value="web development">Web Development & Code</option>
+              <option value="classical guitar">Classical Guitar & Music</option>
+              <option value="professional driving">Professional Driving & Transit</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Search Location Radius</label>
+            <select class="filter-select">
+              <option>Within 2 km</option>
+              <option>Within 5 km</option>
+              <option>Within 15 km</option>
+              <option>Online Only</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Sort By</label>
+            <select class="filter-select">
+              <option>Distance (Closest First)</option>
+              <option>Price (Low to High)</option>
+              <option>Rating (High to Low)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Directory Results List -->
+        <div class="dir-results-panel">
+          <div>
+            <h4 style="font-family:'Syne',sans-serif; margin-bottom:12px; font-size:16px;">Active Mentors</h4>
+            <div class="card-list" id="dir-experts-list">
+              <!-- Reuses list generators dynamically from app.js -->
+            </div>
+          </div>
+          <div style="margin-top: 20px;">
+            <h4 style="font-family:'Syne',sans-serif; margin-bottom:12px; font-size:16px;">Educational Institutions</h4>
+            <div class="card-list" id="dir-institutions-list">
+              <!-- Reuses list generators dynamically from app.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VIEW 4: SUBMIT INSTITUTION PORTAL (NEW) ── -->
+    <section class="app-view" id="submit-view">
+      <div class="profile-card">
+        <h2>Submit Institution</h2>
+        <p>Are you a representative of a physical academy, learning center, or online platform? List your organization to start appearing dynamically on student roadmaps.</p>
+        
+        <form id="institution-form">
+          <div class="form-group">
+            <label class="form-label">Institution / Academy Name</label>
+            <input type="text" class="form-input" id="submit-inst-name" placeholder="E.g., Sector 14 Classical Guitar Center" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Target Skill Taught</label>
+              <input type="text" class="form-input" id="submit-inst-skill" placeholder="E.g., classical guitar" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Type</label>
+              <select class="form-input" id="submit-inst-type" style="padding: 9px 14px;">
+                <option value="offline">Offline (Physical Campus)</option>
+                <option value="online">Online Class</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Location Address / URL</label>
+              <input type="text" class="form-input" id="submit-inst-loc" placeholder="E.g., Sector 14, Chandigarh" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Estimated Tuition / Fee</label>
+              <input type="text" class="form-input" id="submit-inst-fee" placeholder="E.g., $50/mo or $300 total">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Brief Description</label>
+            <textarea class="form-input" id="submit-inst-desc" placeholder="Describe course syllabus, class schedules, and facility equipment..." style="height:100px; resize:none;"></textarea>
+          </div>
+          
+          <button type="submit" class="btn primary" style="width:100%; padding:14px; text-transform:uppercase; font-family:'Syne',sans-serif; justify-content:center;">Register Institution</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ── VIEW 5: DOWNLOADABLE RESOURCES (NEW) ── -->
+    <section class="app-view" id="resources-view">
+      <div class="sec-title-container">
+        <h2 class="sec-title">Odyssey Resource Center</h2>
+        <p class="sec-subtitle">Browse curriculum drafts, checklist blueprints, and tools directories for standard goals.</p>
+      </div>
+
+      <div class="resource-grid">
+        <div class="resource-card">
+          <div>
+            <div class="res-tag">Syllabus</div>
+            <h4 class="res-title">Web Development Curriculum</h4>
+            <p class="res-desc">A complete week-by-week template detailing HTML, CSS, JavaScript React, Node, and database integration structures.</p>
+          </div>
+        </div>
+        <div class="resource-card">
+          <div>
+            <div class="res-tag">Scorebook</div>
+            <h4 class="res-title">Classical Guitar Scale Sheet</h4>
+            <p class="res-desc">ABRSM/Trinity grade scale book drafts, posture guidelines, arpeggio matrices, and beginner repertoire sheets.</p>
+          </div>
+
+        </div>
+        <div class="resource-card">
+          <div>
+            <div class="res-tag">Manual</div>
+            <h4 class="res-title">Commercial Driving Handbook</h4>
+            <p class="res-desc">Draft commercial driver handbook containing 15-point safety inspection lists, traffic rule sheets, and lane guides.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VIEW 5.2: MY PROGRESS DASHBOARD (NEW) ── -->
+    <section class="app-view" id="progress-view">
+      <div class="sec-title-container">
+        <h2 class="sec-title">My Learning Progress</h2>
+        <p class="sec-subtitle">Track your week-by-week phase checklist. Each phase locks automatically until the preceding phase is 100% completed.</p>
+      </div>
+
+      <div class="progress-bar-container" style="background:#FFFFFF; border:var(--border-dark); border-radius:20px; padding:24px; margin-bottom:30px; box-shadow:var(--shadow-sm); display:flex; align-items:center; gap:20px;">
+        <div style="flex:1;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-weight:700;">
+            <span id="progress-plan-title">Active Learning Plan</span>
+            <span id="progress-percent-lbl">0% Completed</span>
+          </div>
+          <div class="progress-track" style="height:16px; background:var(--surface-color-2); border:var(--border-dark); border-radius:10px; overflow:hidden; position:relative;">
+            <div id="progress-fill-bar" style="width:0%; height:100%; background:var(--accent-color); transition:width-percent 0.4s ease;"></div>
+          </div>
+        </div>
+        <button class="btn primary" onclick="switchView('journey-view'); document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelector('[data-view=journey-view]').classList.add('active');" style="height:fit-content; align-self:center;">Explore Plans</button>
+      </div>
+
+      <!-- Locked phases container -->
+      <div class="phases-timeline-wrapper" id="progress-phases-container" style="display:flex; flex-direction:column; gap:20px;">
+        <!-- Generated dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- ── VIEW 5.5: CONNECT PEERS VIEW (NEW) ── -->
+    <section class="app-view" id="peers-view">
+      <div class="sec-title-container">
+        <h2 class="sec-title">Connect Peers Network</h2>
+        <p class="sec-subtitle">Connect with other active learners currently following the same skill roadmap.</p>
+      </div>
+
+      <div class="dir-layout">
+        <!-- Sidebar context info -->
+        <div class="dir-search-panel">
+          <div class="filter-group">
+            <label class="filter-label">Active Learning Plan</label>
+            <div id="peer-active-plan-badge" style="background:var(--accent-light); border:var(--border-dark); border-radius:12px; padding:12px; font-weight:700; font-family:'Syne',sans-serif; text-transform:uppercase; text-align:center; color:var(--accent-color);">
+              Web Development
+            </div>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Filter Peer Level</label>
+            <select class="filter-select" id="peer-level-select" onchange="filterPeersByLevel(this.value)">
+              <option value="all">All Levels</option>
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Pro">Pro</option>
+            </select>
+          </div>
+          <div style="background:var(--surface-color-2); border:1px dashed var(--border-color); padding:16px; border-radius:12px; font-size:11px; line-height:1.4; color:var(--text-muted);">
+            👥 Connecting with peers on the same learning roadmap helps split task blocks and speeds up skill acquisition!
+          </div>
+        </div>
+
+        <!-- Peers list grid -->
+        <div class="dir-results-panel">
+          <h4 style="font-family:'Syne',sans-serif; margin-bottom:12px; font-size:16px;">Active Study Buddies</h4>
+          <div class="card-list" id="peers-list-container">
+            <!-- Rendered dynamically by app.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VIEW 6: REGISTER PROFILE ── -->
+    <section class="app-view" id="profile-view">
+      <div class="profile-card">
+        <h2>Create Odyssey Profile</h2>
+        <p>Set up your profile to customize journey generation, save your roadmap progress, and activate connections with matched experts.</p>
+        
+        <div class="role-select-box">
+          <div class="role-option selected" data-role="learner">
+            <div class="role-option-title">Learner Profile</div>
+            <div class="role-option-desc">I want to learn skills, discover local academies, and get customized step roadmaps.</div>
+          </div>
+          <div class="role-option" data-role="expert">
+            <div class="role-option-title">Expert / Mentor</div>
+            <div class="role-option-desc">I hold active skills. I want to surface on local student maps and teach.</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" id="reg-name" placeholder="E.g., Rohan Sharma">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" id="reg-email" placeholder="E.g., rohan@gmail.com">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Location / Sector</label>
+            <input type="text" class="form-input" id="reg-location" placeholder="E.g., Sector 14, Chandigarh" value="Sector 14, Chandigarh">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Student Roll Number / Business ID</label>
+            <input type="text" class="form-input" id="reg-roll" placeholder="E.g., PU-1029">
+          </div>
+        </div>
+        
+        <button class="btn primary" id="register-btn" style="width:100%; padding:14px; text-transform:uppercase; font-family:'Syne',sans-serif; justify-content:center;">Save Profile Configuration</button>
+      </div>
+    </section>
+
+    <!-- ── VIEW 7: USER DASHBOARD ── -->
+    <section class="app-view" id="dashboard-view">
+      <div class="sec-title-container">
+        <h2 class="sec-title">My Dashboard Center</h2>
+        <p class="sec-subtitle">Track your active roadmaps, progress checkpoints, and connection histories.</p>
+      </div>
+
+      <div class="journey-grid">
+        <!-- Left: Active Journeys -->
+        <div>
+          <div class="sidebar-panel" style="margin-bottom: 24px;">
+            <h4 class="panel-title" style="margin-bottom: 12px;">Active Journeys</h4>
+            <div style="background:var(--surface-color-2); padding:16px; border-radius:12px; border:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="font-weight:600; font-size:15px;" id="dash-active-skill">Web Development Certification</div>
+                <div style="font-size:12px; color:var(--text-muted);" id="dash-step-status">Current Step: 1/4 Completed</div>
+              </div>
+              <div style="font-family:'Syne',sans-serif; color:var(--accent-color); font-weight:800; font-size:18px;" id="dash-percent-status">25% Done</div>
+            </div>
+          </div>
+          
+          <div class="sidebar-panel">
+            <h4 class="panel-title" style="margin-bottom: 12px;">Recent Mentor Chats</h4>
+            <div class="card-list">
+              <div class="expert-card" style="cursor:pointer;" onclick="openChatWith('Rohan Sharma')">
+                <div class="expert-av" style="width:36px; height:36px; font-size:12px; background:#ECE9E4">RS</div>
+                <div class="expert-details">
+                  <div class="expert-name">Rohan Sharma</div>
+                  <div class="expert-sub">"Hey! Do you want to set up an offline session in Sector 14?"</div>
+                </div>
+                <div style="font-size:10px; color:var(--text-faint); align-self:center;">2m ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Profile Info -->
+        <div class="journey-sidebar">
+          <div class="sidebar-panel">
+            <h4 class="panel-title" style="margin-bottom: 16px;">Profile Card</h4>
+            <div style="text-align:center; padding:10px 0; border-bottom:1px solid var(--border-color); margin-bottom:16px;">
+              <div style="width:60px; height:60px; border-radius:50%; background:var(--accent-color); color:#FFFFFF; font-size:24px; font-weight:800; display:flex; align-items:center; justify-content:center; margin:0 auto 12px;" id="dash-avatar">👤</div>
+              <h3 id="dash-profile-name" style="font-family:'Syne',sans-serif; font-size:18px; font-weight:700;">Guest User</h3>
+              <span class="role-tag" id="dash-profile-role" style="font-size:10px; font-weight:700; text-transform:uppercase; padding:3px 10px; border-radius:10px; background:rgba(var(--accent-color-rgb),0.08); color:var(--accent-color);">LEARNER</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:12px; font-size:13px;">
+              <div style="display:flex; justify-content:space-between;"><span style="color:var(--text-muted);">Email:</span><span id="dash-profile-email">guest@odyssey.com</span></div>
+              <div style="display:flex; justify-content:space-between;"><span style="color:var(--text-muted);">Location:</span><span id="dash-profile-location">Sector 14, Chandigarh</span></div>
+              <div style="display:flex; justify-content:space-between;"><span style="color:var(--text-muted);">Details:</span><span id="dash-profile-extra">Roll No: PU-1029</span></div>
+            </div>
+            <button class="btn" onclick="switchView('profile-view')" style="width:100%; margin-top:20px; text-align:center; display:block;">Edit Profile Details</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VIEW 8: ABOUT THE PLATFORM ── -->
+    <section class="app-view" id="about-view">
+      
+      <!-- Hero Banner -->
+      <div class="about-hero-banner">
+        <div class="about-hero-content">
+          <div class="pill-badge" style="background:#D1FAE5; border-color:#1C1917; color:#15803D;">Platform Overview</div>
+          <h1 class="about-hero-title">About <em>Odyssey</em></h1>
+          <p class="about-hero-sub">Odyssey is a universal goal and skill execution platform that bridges digital learning roadmaps with physical, localized educational support. One engine processes every goal — from coding to classical guitar to commercial driving.</p>
+        </div>
+        <div class="about-hero-art">
+          <svg viewBox="0 0 280 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Compass Rose -->
+            <circle cx="140" cy="125" r="90" fill="#FFFFFF" stroke="#1C1917" stroke-width="2.5"/>
+            <circle cx="140" cy="125" r="70" fill="none" stroke="#1C1917" stroke-width="1" stroke-dasharray="4 4"/>
+            <circle cx="140" cy="125" r="50" fill="none" stroke="#1C1917" stroke-width="1" stroke-dasharray="2 2"/>
+            <!-- N arrow -->
+            <polygon points="140,35 133,65 140,55 147,65" fill="#EA580C" stroke="#1C1917" stroke-width="1.5"/>
+            <!-- S arrow -->
+            <polygon points="140,215 133,185 140,195 147,185" fill="#3B82F6" stroke="#1C1917" stroke-width="1.5"/>
+            <!-- E arrow -->
+            <polygon points="230,125 200,118 210,125 200,132" fill="#10B981" stroke="#1C1917" stroke-width="1.5"/>
+            <!-- W arrow -->
+            <polygon points="50,125 80,118 70,125 80,132" fill="#FBBF24" stroke="#1C1917" stroke-width="1.5"/>
+            <!-- Center dot -->
+            <circle cx="140" cy="125" r="6" fill="#EA580C" stroke="#1C1917" stroke-width="2"/>
+            <!-- Labels -->
+            <text x="140" y="28" font-size="10" font-family="'Syne', sans-serif" font-weight="800" text-anchor="middle" fill="#EA580C">GOALS</text>
+            <text x="140" y="240" font-size="10" font-family="'Syne', sans-serif" font-weight="800" text-anchor="middle" fill="#3B82F6">SKILLS</text>
+            <text x="245" y="128" font-size="10" font-family="'Syne', sans-serif" font-weight="800" fill="#10B981">MENTORS</text>
+            <text x="8" y="128" font-size="10" font-family="'Syne', sans-serif" font-weight="800" fill="#FBBF24">LOCAL</text>
+            <!-- Orbiting icons -->
+            <circle cx="185" cy="70" r="16" fill="#FEF3C7" stroke="#1C1917" stroke-width="1.5"/>
+            <text x="185" y="75" font-size="12" text-anchor="middle">🎯</text>
+            <circle cx="95" cy="70" r="16" fill="#D1FAE5" stroke="#1C1917" stroke-width="1.5"/>
+            <text x="95" y="75" font-size="12" text-anchor="middle">🧠</text>
+            <circle cx="185" cy="180" r="16" fill="#DBEAFE" stroke="#1C1917" stroke-width="1.5"/>
+            <text x="185" y="185" font-size="12" text-anchor="middle">🏫</text>
+            <circle cx="95" cy="180" r="16" fill="#FED7AA" stroke="#1C1917" stroke-width="1.5"/>
+            <text x="95" y="185" font-size="12" text-anchor="middle">👤</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Core Mission Section -->
+      <div class="about-mission-section">
+        <div class="about-mission-card">
+          <div class="about-mission-icon">🌍</div>
+          <h3>Universal Goal Engine</h3>
+          <p>A single domain-agnostic processor that accepts any skill or goal in natural language and generates custom learning paths with milestones, checklists, and timeframes.</p>
+        </div>
+        <div class="about-mission-card">
+          <div class="about-mission-icon">🤝</div>
+          <h3>Hybrid Connection Model</h3>
+          <p>We bridge digital week-by-week goals with real-world offline resources — matching local learning academies and active skill holders right in your neighborhood.</p>
+        </div>
+        <div class="about-mission-card">
+          <div class="about-mission-icon">🔄</div>
+          <h3>Agentic Monitoring Loop</h3>
+          <p>Proactive check-in agents monitor task completions. If learning progress stalls, the system flags the checkpoint and initiates alerts to connected mentors automatically.</p>
+        </div>
+      </div>
+
+      <!-- System Architecture Flowchart -->
+      <div class="about-flowchart-section">
+        <div class="sec-title-container" style="text-align:center; margin-bottom:40px;">
+          <div class="pill-badge">System Architecture</div>
+          <h2 class="sec-title" style="font-size:32px; margin-top:10px;">Platform Operation Flowchart</h2>
+          <p class="sec-subtitle" style="font-size:14px; max-width:640px; margin:8px auto 0;">The complete data flow from goal input to skill mastery — showing how each layer of the Odyssey engine processes, personalizes, and connects learners with resources.</p>
+        </div>
+
+        <!-- Large Flowchart SVG -->
+        <div class="about-flowchart-container">
+          <svg viewBox="0 0 900 480" fill="none" xmlns="http://www.w3.org/2000/svg" class="about-flowchart-svg">
+            <!-- Background grid -->
+            <defs>
+              <pattern id="aboutGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1C1917" stroke-width="0.15" opacity="0.2"/>
+              </pattern>
+            </defs>
+            <rect width="900" height="480" fill="#F7F5F0" rx="20"/>
+            <rect width="900" height="480" fill="url(#aboutGrid)" rx="20"/>
+
+            <!-- Title bar -->
+            <rect x="20" y="15" width="860" height="35" rx="8" fill="#FFFFFF" stroke="#1C1917" stroke-width="1.5"/>
+            <text x="450" y="37" font-size="12" font-family="'Syne', sans-serif" font-weight="800" text-anchor="middle" fill="#1C1917">ODYSSEY PLATFORM — SYSTEM OPERATION FLOWCHART</text>
+
+            <!-- ROW 1: Input → Parse → Generate → Match -->
+            <!-- Node 1: Goal Input -->
+            <rect x="30" y="75" width="180" height="70" rx="12" fill="#FFFFFF" stroke="#1C1917" stroke-width="2"/>
+            <rect x="30" y="75" width="180" height="24" rx="12" fill="#FED7AA" stroke="#1C1917" stroke-width="2"/>
+            <rect x="30" y="87" width="180" height="12" fill="#FED7AA"/>
+            <text x="120" y="92" font-size="9" font-family="'Syne', sans-serif" font-weight="800" text-anchor="middle" fill="#1C1917">LAYER 0</text>
+            <text x="120" y="118" font-size="11" font-family="'Syne', sans-serif" font-weight="700" text-anchor="middle" fill="#1C1917">🎯 Goal Input</text>
+            <text x="120" y="133" font-size="8" font-family="'Outfit', sans-serif" text-anchor="middle" fill="#57534E">Natural language entry</text>
+
+            <!-- Arrow 1→2 -->
+            <path d="M 210 110 L 250 110" stroke="#EA580C" stroke-width="2" fill="none"/>
+            <polygon points="250,110 243,106 243,114" fill="#EA580C"/>
+
+            <!-- Node 2: Intent Parse -->
+            <rect x="250" y="75" width="180" height="70" rx="12" fill="#FFFFFF" stroke="#1C1917" stroke-width="2"/>
+            <rect x="250" y="75" width="180" height="24" rx="12" fill="#D1FAE5" stroke="#1C1917" stroke-width="2"/>
+            <rect x="250" y="87" width="180" height="12" fill="#D1FAE5"/>
+            <text x="340" y="92" font-size="9" font-family="'Syne', sans-serif" font-weight="800" text-anchor="middle" fill="#1C1917">LAYER 1</text>
+            <text x="340" y="118" font-size="11" font-family="'Syne', sans-serif" font-weight="700" text-anchor="middle" fill="#1C1917">🧠 Intent Parsing</text>
+            <text x="340" y="133" font-size="8" font-family="'Outfit', sans-serif" text-anchor="middle" fill="#57534E">Classify subject &amp; constraints</text>
+
+            <!-- Arrow 2→3 -->
+            <path d="M 430 110 L 470 110" stroke="#EA580C" stroke-width="2" fill="none"/>
+            <polygon points="470,110 463,106 463,114" fill="#EA580C"/>
+
+            <!-- Node 3: Roadmap Generation -->
+            <rect x="470" y="75" width="180" height="70" rx="12" fill="#FFFFFF" stroke="#1C1917" stroke-width="2"/>
+            <rect x="470" y="75" width="180" height="24" rx="12" fill="#DBEAFE" stroke="#1C1917" stroke-width="2"/>
+            <rect x="470" y="87" width="180" height="12" fill="#DBEAFE"/>
+            <text x="560" y="92" font-size="9" font-family="'Syne', sans-serif" font-weight="800" text-anchor="middle" fill="#1C1917">LAYER 2</text>
+            <text x="560" y="118" font-size="11" font-family="'Syne', sans-serif" font-weight="700" text-anchor="middle" fill="#1C1917">📋 Roadmap Engine</text>
+            <text x="560" y="133" font-size="8" font-family="'Outfit', sans-serif" text-anchor="middle" fill="#57534E">Generate milestone timeline</text>
+
+            <!-- Arrow 3→4 -->
+            <path d="M 650 110 L 690 110" stroke="#EA580C" stroke-width="2" fill="none"/>
+            <polygon points="690,110 683,106 683,114" fill="#EA580C"/>
+
+            <!-- Node 4: Hybrid Matchmaking -->
+            <rect x="690" y="75" width="180" height="70" rx="12" fill="#FFFFFF" stroke="#1C1917" stroke-width="2"/>
+            <rect x="690" y="75" width="180" height="24" rx="12" fill="#FEF3C7" stroke="#1C1917" stroke-width="2"/>
+            <rect x="690" y="87" width="180" height="12" fill="#FEF3C7"/>
+            <text x="780" y="92" font-size="9" font-family="'Syne', sans-serif" font-weight="800" text-anchor="middle" fill="#1C1917">LAYER 3</text>
+            <text x="780" y="118" font-size="11" font-family="'Syne', sans-serif" font-weight="700" text-anchor="middle" fill="#1C1917">🔗 Hybrid Matching</text>
+            <text x="780" y="133" font-size="8" font-family="'Outfit', sans-serif" text-anchor="middle" fill="#57534E">Local + Online resources</text>
+
+            <!-- Downward loop connector from Row 1 to Row 2 -->
+            <path d="M 870 110 L 885 110 L 885 195 L 15 195 L 15 260 L 30 260" stroke="#1C1917" stroke-width="1.5" stroke-dasharray="4 4" fill="none"/>
+            <polygon points="30,260 23,256 23,264" fill="#1C1917"/>
+
+            <!-- ROW 2: Checklist → Locking → Blocker → Peers -->
+            <!-- Node 5: Checklist Persistence -->
+            <rect x="30" y="225" width="180" height="70" rx="12" fill="#FFFFFF" stroke="#1C1917" stroke-width="2"/>
+            <rect x="30" y="225" width="180" height="24" rx="12" fill="#E0E7FF" stroke="#1C1917" stroke-width="2"/>
+            <rect x="30" y="237" width="180" height="12" fill="#E0E7FF"/>
+            <text x="120" y="242" font-size="9" font-family="'Syne', sans-serif" font-weight="800" text-anchor="middle" fill="#1C1917">LAYER 4</text>
+            <text x="120" y="268" font-size="11" font-family="'Syne', sans-serif" font-weight="700" text-anchor="middle" fill="#1C1917">✅ Task Checklists</text>
+            <text x="120" y="283" font-size="8" font-family="'Outfit', sans-serif" text-anchor="middle" fill="#57534E">localStorage persistence</text>
+
+            <!-- Arrow 5→6 -->
+            <path d="M 210 260 L 250 260" stroke="#EA580C" stroke-width="2" fill="none"/>
+            <polygon points="250,260 243,256 243,264" fill="#EA580C"/>
+
+            <!-- Node 6: Phase Locking -->
+            <rect x="250" y="225" width="180" height="70" rx="12" fill="#FFFFFF" stroke="#1C1917" stroke-width="2"/>
+            <rect x="250" y="225" width="180" height="24" rx="12" fill="#FEE2E2" stroke="#1C1917" stroke-width="2"/>
+            <rect x="250" y="237" width="180" height="12" fill="#FEE2E2"/>
+            <text x="340" y="242" font-size="9" font-family="'Syne', sans-serif" font-weight="800" text-anchor="middle" fill="#1C1917">LAYER 5</text>
+            <text x="340" y="268" font-size="11" font-family="'Syne', sans-serif" font-weight="700" text-anchor="middle" fill="#1C1917">🔒 Phase Locking</text>
+            <text x="340" y="283" font-size="8" font-family="'Outfit', sans-serif" text-anchor="middle" fill="#57534E">Sequential unlock gates</text>
+
+            <!-- Arrow 6→7 -->
+            <path d="M 430 260 L 470 260" stroke="#EA580C" stroke-width="2" fill="none"/>
+            <polygon points="470,260 463,256 463,264" fill="#EA580C"/>
+
+            <!-- Node 7: Blocker Nudges -->
+            <rect x="470" y="225" width="180" height="70" rx="12" fill="#FFFFFF" stroke="#1C1917" stroke-width="2"/>
+            <rect x="470" y="225" width="180" height="24" rx="12" fill="#FCE7F3" stroke="#1C1917" stroke-width="2"/>
+            <rect x="470" y="237" width="180" height="12" fill="#FCE7F3"/>
+            <text x="560" y="242" font-size="9" font-family="'Syne', sans-serif" font-weight="800" text-anchor="middle" fill="#1C1917">LAYER 6</text>
+            <text x="560" y="268" font-size="11" font-family="'Syne', sans-serif" font-weight="700" text-anchor="middle" fill="#1C1917">🤖 Blocker Nudges</text>
+            <text x="560" y="283" font-size="8" font-family="'Outfit', sans-serif" text-anchor="middle" fill="#57534E">Agentic check-in alerts</text>
+
+            <!-- Arrow 7→8 -->
+            <path d="M 650 260 L 690 260" stroke="#EA580C" stroke-width="2" fill="none"/>
+            <polygon points="690,260 683,256 683,264" fill="#EA580C"/>
+
+            <!-- Node 8: Peers & Chat -->
+            <rect x="690" y="225" width="180" height="70" rx="12" fill="#FFFFFF" stroke="#1C1917" stroke-width="2"/>
+            <rect x="690" y="225" width="180" height="24" rx="12" fill="#D1FAE5" stroke="#1C1917" stroke-width="2"/>
+            <rect x="690" y="237" width="180" height="12" fill="#D1FAE5"/>
+            <text x="780" y="242" font-size="9" font-family="'Syne', sans-serif" font-weight="800" text-anchor="middle" fill="#1C1917">LAYER 7</text>
+            <text x="780" y="268" font-size="11" font-family="'Syne', sans-serif" font-weight="700" text-anchor="middle" fill="#1C1917">💬 Peers & Chat</text>
+            <text x="780" y="283" font-size="8" font-family="'Outfit', sans-serif" text-anchor="middle" fill="#57534E">Study buddy network</text>
+
+            <!-- ROW 3: Algorithm Heuristics -->
+            <rect x="30" y="340" width="410" height="120" rx="14" fill="#FFFFFF" stroke="#1C1917" stroke-width="2"/>
+            <rect x="30" y="340" width="410" height="28" rx="14" fill="#FED7AA" stroke="#1C1917" stroke-width="2"/>
+            <rect x="30" y="354" width="410" height="14" fill="#FED7AA"/>
+            <text x="235" y="358" font-size="10" font-family="'Syne', sans-serif" font-weight="800" text-anchor="middle" fill="#1C1917">ALGORITHM A: PROXIMITY MATCH HEURISTIC</text>
+            <text x="50" y="390" font-size="9" font-family="'Outfit', sans-serif" fill="#57534E">For user U(x,y) and mentor M_i(x_i, y_i):</text>
+            <text x="50" y="408" font-size="10" font-family="'Syne', sans-serif" font-weight="700" fill="#EA580C">d(U, M_i) = √[(x-x_i)² + (y-y_i)²]</text>
+            <text x="50" y="426" font-size="9" font-family="'Outfit', sans-serif" fill="#57534E">Matches = { M_i | d(U, M_i) ≤ Radius R }</text>
+            <text x="50" y="444" font-size="8" font-family="'Outfit', sans-serif" fill="#A8A29E">Sorting places closest online/offline resources first.</text>
+
+            <rect x="460" y="340" width="410" height="120" rx="14" fill="#FFFFFF" stroke="#1C1917" stroke-width="2"/>
+            <rect x="460" y="340" width="410" height="28" rx="14" fill="#D1FAE5" stroke="#1C1917" stroke-width="2"/>
+            <rect x="460" y="354" width="410" height="14" fill="#D1FAE5"/>
+            <text x="665" y="358" font-size="10" font-family="'Syne', sans-serif" font-weight="800" text-anchor="middle" fill="#1C1917">ALGORITHM B: PHASE STATE LOCKING</text>
+            <text x="480" y="390" font-size="9" font-family="'Outfit', sans-serif" fill="#57534E">Let checklist tasks in Phase N = set T_N:</text>
+            <text x="480" y="408" font-size="10" font-family="'Syne', sans-serif" font-weight="700" fill="#EA580C">L₁ = 0 (Always Unlocked)</text>
+            <text x="480" y="426" font-size="10" font-family="'Syne', sans-serif" font-weight="700" fill="#EA580C">L_N = 0 if ∀t∈T_{N-1}, t.checked=true</text>
+            <text x="480" y="444" font-size="8" font-family="'Outfit', sans-serif" fill="#A8A29E">Otherwise L_N = 1 (locked). localStorage syncs state.</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Platform Screenshots Gallery -->
+      <div class="about-screenshots-section">
+        <div class="sec-title-container" style="text-align:center; margin-bottom:40px;">
+          <div class="pill-badge" style="background:#DBEAFE; border-color:#1C1917; color:#1D4ED8;">Visual Tour</div>
+          <h2 class="sec-title" style="font-size:32px; margin-top:10px;">Platform Screenshots</h2>
+          <p class="sec-subtitle" style="font-size:14px; max-width:640px; margin:8px auto 0;">Explore each functional view of the Odyssey platform — from the landing page to the peer network.</p>
+        </div>
+
+        <!-- Screenshot 1: Landing Page -->
+        <div class="about-screenshot-row">
+          <div class="about-screenshot-text">
+            <div class="about-screenshot-num">01</div>
+            <h3>Landing Page & Hero</h3>
+            <p>The welcoming entry point featuring the Odyssey brand with a playful warm illustration, live platform statistics, and quick-access CTAs for building roadmaps, registering as a mentor, or exploring the full navigation menu.</p>
+            <div class="about-screenshot-tags">
+              <span class="about-tag">Hero Section</span>
+              <span class="about-tag">Live Stats</span>
+              <span class="about-tag">SVG Art</span>
+            </div>
+          </div>
+          <div class="about-screenshot-img-wrap">
+            <img src="assets/img/screenshot_home.png" alt="Odyssey Landing Page" class="about-screenshot-img" loading="lazy"/>
+          </div>
+        </div>
+
+        <!-- Screenshot 2: Roadmap/Journey View -->
+        <div class="about-screenshot-row reverse">
+          <div class="about-screenshot-text">
+            <div class="about-screenshot-num">02</div>
+            <h3>Goal Explorer & Roadmap</h3>
+            <p>The core engine interface where users type any skill or goal. The AI-powered intent parser generates a step-by-step roadmap with milestones, checkable tasks, and dynamically matched mentors and institutions in the sidebar.</p>
+            <div class="about-screenshot-tags">
+              <span class="about-tag">AI Roadmap</span>
+              <span class="about-tag">Mentors</span>
+              <span class="about-tag">Institutions</span>
+            </div>
+          </div>
+          <div class="about-screenshot-img-wrap">
+            <img src="assets/img/screenshot_roadmap.png" alt="Odyssey Roadmap View" class="about-screenshot-img" loading="lazy"/>
+          </div>
+        </div>
+
+        <!-- Screenshot 3: Architecture View -->
+        <div class="about-screenshot-row">
+          <div class="about-screenshot-text">
+            <div class="about-screenshot-num">03</div>
+            <h3>Platform Architecture</h3>
+            <p>An interactive architecture analyzer that lets users explore how each layer of the Odyssey engine works — from intent processing and personalization to vertical repertoires and marketplace connections.</p>
+            <div class="about-screenshot-tags">
+              <span class="about-tag">5 Layers</span>
+              <span class="about-tag">Interactive</span>
+              <span class="about-tag">Technical</span>
+            </div>
+          </div>
+          <div class="about-screenshot-img-wrap">
+            <img src="assets/img/screenshot_architecture.png" alt="Odyssey Architecture View" class="about-screenshot-img" loading="lazy"/>
+          </div>
+        </div>
+
+        <!-- Screenshot 4: Progress View -->
+        <div class="about-screenshot-row reverse">
+          <div class="about-screenshot-text">
+            <div class="about-screenshot-num">04</div>
+            <h3>Gamified Progress Tracker</h3>
+            <p>A gamified phase-locked progress system where each learning phase unlocks only after the preceding phase is 100% completed. Tasks persist via localStorage and sync across all views in real-time.</p>
+            <div class="about-screenshot-tags">
+              <span class="about-tag">Phase Locking</span>
+              <span class="about-tag">Checklists</span>
+              <span class="about-tag">Persistence</span>
+            </div>
+          </div>
+          <div class="about-screenshot-img-wrap">
+            <img src="assets/img/screenshot_progress.png" alt="Odyssey Progress View" class="about-screenshot-img" loading="lazy"/>
+          </div>
+        </div>
+
+        <!-- Screenshot 5: Peers View -->
+        <div class="about-screenshot-row">
+          <div class="about-screenshot-text">
+            <div class="about-screenshot-num">05</div>
+            <h3>Connect Peers Network</h3>
+            <p>A study-buddy network that connects learners following the same skill roadmap. Filter peers by expertise level (Beginner, Intermediate, Pro) and initiate real-time chat sessions to collaborate on tasks.</p>
+            <div class="about-screenshot-tags">
+              <span class="about-tag">Peer Matching</span>
+              <span class="about-tag">Chat System</span>
+              <span class="about-tag">Levels</span>
+            </div>
+          </div>
+          <div class="about-screenshot-img-wrap">
+            <img src="assets/img/screenshot_peers.png" alt="Odyssey Peers Network" class="about-screenshot-img" loading="lazy"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- Future Scope / Vision Section -->
+      <div class="about-vision-section">
+        <div class="sec-title-container" style="text-align:center; margin-bottom:40px;">
+          <div class="pill-badge" style="background:#FCE7F3; border-color:#1C1917; color:#BE185D;">Future Horizons</div>
+          <h2 class="sec-title" style="font-size:32px; margin-top:10px;">Vision & Expansion Scope</h2>
+          <p class="sec-subtitle" style="font-size:14px; max-width:640px; margin:8px auto 0;">Where Odyssey is heading — from multi-agent intelligence to decentralized credentials.</p>
+        </div>
+
+        <div class="about-vision-grid">
+          <div class="about-vision-card">
+            <div class="about-vision-icon">🤖</div>
+            <h4>Multi-Agent Check-Ins</h4>
+            <p>Secondary agents that analyze elapsed time since tasks were rendered, predicting student blockers and proactively scheduling mentor sessions.</p>
+          </div>
+          <div class="about-vision-card">
+            <div class="about-vision-icon">🔗</div>
+            <h4>Blockchain Credentials</h4>
+            <p>Transforming milestone completions into decentralized micro-credentials, verified cryptographically by partner institutions on-chain.</p>
+          </div>
+          <div class="about-vision-card">
+            <div class="about-vision-icon">🥽</div>
+            <h4>Cooperative VR Workshops</h4>
+            <p>Virtual reality spaces inside our chat functionality, enabling mentors to teach physical trades remotely with real-time haptic feedback.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- ── MOCK CHAT OVERLAY ── -->
+  <div class="chat-backdrop" id="chat-window">
+    <div class="chat-header">
+      <div class="chat-title">Chat with <span id="chat-recipient-name">Rohan Sharma</span></div>
+      <button class="chat-close" onclick="closeChat()">×</button>
+    </div>
+    <div class="chat-body" id="chat-body">
+      <!-- Chat history is populated dynamically -->
+    </div>
+    <div class="chat-input-area">
+      <input type="text" class="chat-input" id="chat-input-text" placeholder="Type a message..." onkeypress="if(event.key==='Enter') sendMessage()">
+      <button class="chat-send" onclick="sendMessage()">➔</button>
+    </div>
+  </div>
+
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
